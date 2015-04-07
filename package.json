@@ -1,0 +1,40 @@
+{
+  "name": "lost",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/animikii/sanyas-nationalmap.git"
+  },
+  "description": "Find you lost things",
+  "main": "index.js",
+  "scripts": {
+    "w": "watchify -t babelify -t reactify client/main.js -o public/bundle.js -d",
+    "d": "browserify -t babelify -t reactify client/main.js -o public/bundle.js -d",
+    "build": "browserify -g uglifyify -t reactify client/main.js -o public/bundle.js",
+    "b": "npm run build",
+    "s": "nodemon -w ./server",
+    "start": "npm run s",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "spirin.vladimir@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "domify": "^1.3.2",
+    "domready": "^1.0.7",
+    "lodash": "^3.5.0",
+    "node-uuid": "^1.4.3",
+    "react": "^0.13.1",
+    "react-gmaps": "^0.1.6",
+    "socket.io": "^1.3.5",
+    "socket.io-client": "^1.3.5"
+  },
+  "devDependencies": {
+    "babelify": "^6.0.1",
+    "browserify": "^9.0.7",
+    "mocha": "^2.2.1",
+    "nodemon": "^1.3.7",
+    "reactify": "^1.1.0",
+    "uglifyify": "^3.0.1",
+    "watchify": "^2.4.0"
+  }
+}
