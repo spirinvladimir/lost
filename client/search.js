@@ -1,5 +1,7 @@
 /*jslint node:true*/
-var React = require('react');
+var React = require('react'),
+    naviageToAddress = require('./naviageToAddress'),
+    id;
     
 module.exports = React.createClass({
     getInitialState: function () {
@@ -17,8 +19,14 @@ module.exports = React.createClass({
     },
     onChange: function (e) {
         'use strict';
-        this.setState(
-            {value: e.target.value}
-        );
+        var text = e.target.value,
+            goto = this.props.goto;
+        clearTimeout(id);
+        id = setTimeout(function () {
+            naviageToAddress(text, goto);
+        }, 2000);
+        this.setState({
+            value: text
+        });
     }
 });
