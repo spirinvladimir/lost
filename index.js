@@ -13,6 +13,8 @@ var http = require('http'),
                 serveFile(['public', 'index.html'], res);
             } else if (req.url === '/bundle.js') {
                 serveFile(['public', 'bundle.js'], res);
+            } else if (req.url === '/s.css') {
+                serveFile(['public', 's.css'], res);
             }
         }
     }),

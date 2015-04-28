@@ -1,14 +1,24 @@
 /*jslint node:true*/
 var React = require('react');
     
-module.exports = function () {
-    'use strict';
-    var Hello = React.createClass({
-        render: function() {
-            return React.DOM.input({className: 'search'}, '');
-        }
-    });
-    Hello = React.createFactory(Hello);
-    
-    React.render(Hello({}), document.body);
-};
+module.exports = React.createClass({
+    getInitialState: function () {
+        'use strict';
+        return {
+            value: 'moscow'
+        };
+    },
+    render: function () {
+        'use strict';
+        return React.DOM.input(
+            {className: 'search', onChange: this.onChange},
+            this.state.value
+        );
+    },
+    onChange: function (e) {
+        'use strict';
+        this.setState(
+            {value: e.target.value}
+        );
+    }
+});
