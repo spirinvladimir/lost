@@ -2,25 +2,25 @@
 'use strict';
 var React = require('react'),
     Search = require('./search'),
+    style = require('./style'),
     ReactGmaps = require('react-gmaps'),
     Gmaps = ReactGmaps.Gmaps,
     Marker = ReactGmaps.Marker,
     coords = {
-        lat: 51.5258541,
-        lng: -0.08040660000006028 
+        lat: 37.6173,
+        lng: 55.755826
     },
     App = React.createClass({
         render: function () {
             return (
-                <div>
+                <div class='app'>
                     <Gmaps 
-                        address='moscow'
                         ref='Gmaps'
                         width={'100%'}
                         height={'100%'}
-                        lat={coords.lat} 
-                        lng={coords.lng} 
-                        zoom={12} 
+                        lat={coords.lat}
+                        lng={coords.lng}
+                        zoom={12}
                         onMapCreated={this.onMapCreated}
                         onClick={this.onClick}
                     >
@@ -36,7 +36,8 @@ var React = require('react'),
         onMapCreated: function () {
             var map = this.refs.Gmaps.getMap();
             map.setOptions({
-                disableDefaultUI: true
+                disableDefaultUI: true,
+                styles: style
             });
             this.setState({
                 map: map
@@ -45,6 +46,7 @@ var React = require('react'),
         goto: function (location) {
             var map = this.state.map;
             if (map) {
+                console.dir(location);
                 map.setCenter(location);
             }
         },
