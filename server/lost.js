@@ -1,19 +1,28 @@
 /*jslint node:true,nomen:true*/
 module.exports = function (io) {
     'use strict';
-    this.add = function (req, res) {
-        return;
-    };
+    var messages = ['What did you forget?', 'My phone', 'Where?', 'Pisa', 'What about exactly?', 'Railway staition'],
+        sendLastMessages = function (socket, n) {
+            var last = [],
+                i = 0;
+            while ((messages.length !== 0) && (n !== i)) {
+                i += 1;
+                last.unshift(messages[messages.length - i]);
+            }
+            socket.emit('messages', last);
+        };
+    
     io.on('connection', function (socket) {
-        socket.on('login', function (name) {
-            socket.name = name;
-            socket.emit('login', {
-                name: name
-            });
-            console.log(socket.name + ' joined the chat.');
+        //sendLastMessages(socket, 5);
+        socket.emit('messages', messages);
+        
+        socket.on('add', function (message) {
+            messages.push(message);
+            socket.broadcast.emit('new', message);
         });
+        
         socket.on('disconnect', function (socket) {
-            console.log('disconnect');
+            console.log(socket);
         });
     });
 };

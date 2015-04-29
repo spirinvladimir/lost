@@ -2,13 +2,14 @@
 'use strict';
 var React = require('react'),
     Search = require('./search'),
+    Chat = require('./chat/chat.jsx'),
     style = require('./style'),
     ReactGmaps = require('react-gmaps'),
     Gmaps = ReactGmaps.Gmaps,
     Marker = ReactGmaps.Marker,
     coords = {
-        lat: 37.6173,
-        lng: 55.755826
+        lat: 0,
+        lng: 0
     },
     App = React.createClass({
         render: function () {
@@ -20,7 +21,7 @@ var React = require('react'),
                         height={'100%'}
                         lat={coords.lat}
                         lng={coords.lng}
-                        zoom={12}
+                        zoom={2}
                         onMapCreated={this.onMapCreated}
                         onClick={this.onClick}
                     >
@@ -30,6 +31,7 @@ var React = require('react'),
                         />
                     </Gmaps>
                     <Search goto={this.goto}></Search>
+                    <Chat/>
                 </div>
             );
         },
