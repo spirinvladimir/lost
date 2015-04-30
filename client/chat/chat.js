@@ -1,9 +1,9 @@
 /*jslint node:true*/
 'use strict';
 var React = require('react'),
-    Message = require('./message.jsx'),
-    Search = require('./search.jsx'),
-    NewMessage = require('./newMessage.jsx'),
+    Message = require('./message'),
+    Search = require('./search'),
+    NewMessage = require('./newMessage'),
     io = require('socket.io-client')('http://localhost:1337');
 
 module.exports = React.createClass({

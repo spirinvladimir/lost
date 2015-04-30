@@ -11,7 +11,12 @@ module.exports = React.createClass({
     render: function () {
         'use strict';
         return React.DOM.input(
-            {className: 'searchChat', onChange: this.onChange, onKeyDown: this.onKeyDown},
+            {
+                className: 'searchChat',
+                placeholder: 'search in chat',
+                onChange: this.onChange,
+                onKeyDown: this.onKeyDown
+            },
             this.state.value
         );
     },

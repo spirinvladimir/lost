@@ -5,7 +5,10 @@ module.exports = React.createClass({
     render: function () {
         'use strict';
         return React.DOM.input(
-            {className: 'newMessage', onKeyDown: this.onKeyDown}
+            {
+                className: 'newMessage',
+                placeholder: 'your message',
+                onKeyDown: this.onKeyDown}
         );
     },
     onKeyDown: function (e) {

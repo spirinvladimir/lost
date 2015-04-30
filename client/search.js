@@ -7,15 +7,27 @@ module.exports = React.createClass({
     getInitialState: function () {
         'use strict';
         return {
-            value: ''
+            value: '',
+            placeholder: 'search in map'
         };
     },
     render: function () {
         'use strict';
         return React.DOM.input(
-            {className: 'search', onChange: this.onChange, onKeyDown: this.onKeyDown},
-            this.state.value
+            {
+                className: 'search',
+                placeholder: this.state.placeholder,
+                value: this.state.value,
+                onChange: this.onChange,
+                onKeyDown: this.onKeyDown,
+                onFocus: this.onFocus
+            }
         );
+    },
+    onFocus: function () {
+        this.setState({
+            placeholder: ''
+        });
     },
     onKeyDown: function (e) {
         'use strict';
