@@ -5,7 +5,8 @@ module.exports = React.createClass({
     getInitialState: function () {
         'use strict';
         return {
-            value: ''
+            value: '',
+            placeholder: 'Search in chat'
         };
     },
     render: function () {
@@ -13,12 +14,19 @@ module.exports = React.createClass({
         return React.DOM.input(
             {
                 className: 'searchChat',
-                placeholder: 'search in chat',
+                placeholder: this.state.placeholder,
                 onChange: this.onChange,
-                onKeyDown: this.onKeyDown
+                onKeyDown: this.onKeyDown,
+                onFocus: this.onFocus
             },
             this.state.value
         );
+    },
+    onFocus: function () {
+        'use strict';
+        this.setState({
+            placeholder: ''
+        });
     },
     onKeyDown: function (e) {
         'use strict';

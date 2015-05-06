@@ -31,7 +31,10 @@ var React = require('react'),
                         lng: coords.lng,
                         zoom: 2,
                         onMapCreated: this.onMapCreated,
-                        onClick: this.onClick
+                        onClick: this.onClick,
+                        style: {
+                            backgroundColor: '#2B2B2B'
+                        }
                     },
                     React.createElement(Markers, {io: io, map: this.state.map})
                 ),

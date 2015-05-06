@@ -1,9 +1,9 @@
 /*jslint node:true*/
 'use strict';
 var React = require('react'),
-    Message = require('./message'),
     Search = require('./search'),
-    NewMessage = require('./newMessage');
+    NewMessage = require('./newMessage'),
+    AnimList = require('./AnimList');
 
 module.exports = React.createClass({
     getInitialState: function () {
@@ -12,14 +12,22 @@ module.exports = React.createClass({
         };
     },
     render: function () {
+        if (this.state.messages.length === 0) {
+            return null;
+        }
         return React.DOM.div(
             {className: 'chat'},
-            this.state.messages.map(function (message) {
-                return React.createElement(Message, null, message);
-            }).concat([
+            [
+
+                React.createElement(
+                    AnimList,
+                    {
+                        messages: this.state.messages
+                    }
+                ),
                 React.createElement(Search),
                 React.createElement(NewMessage, {io: this.props.io, addNewMessage: this.addNewMessage})
-            ])
+            ]
         );
     },
     addNewMessage: function (message) {

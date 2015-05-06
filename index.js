@@ -15,7 +15,10 @@ var http = require('http'),
                 serveFile(['public', 'bundle.js'], res);
             } else if (req.url === '/s.css') {
                 serveFile(['public', 's.css'], res);
+            } else if (req.url === '/list.css') {
+                serveFile(['public', 'list.css'], res);
             }
+
         }
     }),
     io = new Server(server);
