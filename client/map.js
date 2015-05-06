@@ -2,15 +2,22 @@
 var React = require('react'),
     Search = require('./search'),
     Chat = require('./chat/chat'),
+    Markers = require('./markers'),
     style = require('./style'),
     ReactGmaps = require('react-gmaps'),
+    io = require('socket.io-client')('http://localhost:1337'),
     Gmaps = ReactGmaps.Gmaps,
-    Marker = ReactGmaps.Marker,
     coords = {
         lat: 0,
         lng: 0
     },
     App = React.createClass({
+        getInitialState: function () {
+            'use strict';
+            return {
+                map: undefined
+            };
+        },
         render: function () {
             'use strict';
             return React.DOM.div({className: 'app'}, [
@@ -26,10 +33,10 @@ var React = require('react'),
                         onMapCreated: this.onMapCreated,
                         onClick: this.onClick
                     },
-                    React.createElement(Marker, {lat: coords.lat, lng: coords.lng})
+                    React.createElement(Markers, {io: io, map: this.state.map})
                 ),
                 React.createElement(Search, {goto: this.goto}),
-                React.createElement(Chat)
+                React.createElement(Chat, {io: io})
             ]);
         },
         onMapCreated: function () {
@@ -49,6 +56,7 @@ var React = require('react'),
             if (map) {
                 console.dir(location);
                 map.setCenter(location);
+                map.setZoom(6);
             }
         },
         onClick: function () {

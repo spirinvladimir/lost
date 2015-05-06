@@ -3,8 +3,7 @@
 var React = require('react'),
     Message = require('./message'),
     Search = require('./search'),
-    NewMessage = require('./newMessage'),
-    io = require('socket.io-client')('http://localhost:1337');
+    NewMessage = require('./newMessage');
 
 module.exports = React.createClass({
     getInitialState: function () {
@@ -14,12 +13,12 @@ module.exports = React.createClass({
     },
     render: function () {
         return React.DOM.div(
-            {className: 'chat'},            
+            {className: 'chat'},
             this.state.messages.map(function (message) {
                 return React.createElement(Message, null, message);
             }).concat([
                 React.createElement(Search),
-                React.createElement(NewMessage, {io: io, addNewMessage: this.addNewMessage}),
+                React.createElement(NewMessage, {io: this.props.io, addNewMessage: this.addNewMessage})
             ])
         );
     },
@@ -29,7 +28,8 @@ module.exports = React.createClass({
         });
     },
     componentDidMount: function () {
-        var self = this;
+        var self = this,
+            io = this.props.io;
         io.on('messages', function (messages) {
             self.setState({
                 messages: messages

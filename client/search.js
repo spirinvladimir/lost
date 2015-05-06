@@ -8,7 +8,7 @@ module.exports = React.createClass({
         'use strict';
         return {
             value: '',
-            placeholder: 'search in map'
+            placeholder: 'Enter a location'
         };
     },
     render: function () {
