@@ -32,9 +32,8 @@ module.exports = React.createClass({
             var text = e.target.value,
                 props = this.props,
                 io = props.io,
-                addNewMessage = props.addNewMessage;
-            addNewMessage(text);
-            io.emit('add', text);
+                ee = props.ee;
+            ee.emit('new', text);
             e.target.value = '';
         }
     }

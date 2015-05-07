@@ -29,7 +29,8 @@ ul {
   margin: 0;
   width: 42.5vw;
   height: 100vh;
-  overflow-y: hidden
+  overflow-y: hidden;
+  color: aliceblue;
 }
 
 .demo > div {

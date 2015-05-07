@@ -10,18 +10,20 @@ module.exports = React.createClass({
         };
     },
     render: function () {
+        var sm = this.state.messages,
+            pm = this.props.messages;
         return React.DOM.div(
             {
                 onWheel: this.wheel
             },
             React.createElement(List, {
-                items: this.state.messages
+                items: (sm.length === pm.length) ? sm : pm
             })
         );
     },
     wheel: function (e) {
         var list = this.state.messages.slice();
-        if (e.deltaY > 0) {
+        if (e.deltaY < 0) {
             this.up(list);
         } else {
             this.down(list);
@@ -40,8 +42,15 @@ module.exports = React.createClass({
         });
     },
     componentWillMount: function () {
-        this.setState({
-            messages: this.props.messages
-        });
+        var props = this.props,
+            ee = props.ee,
+            self = this,
+            update = function (list) {
+                self.setState({
+                    messages: props.messages
+                });
+            };
+        update(props.messages);
+        ee.on('update', update);
     }
 });
