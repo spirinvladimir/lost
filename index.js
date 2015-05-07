@@ -25,4 +25,4 @@ var http = require('http'),
 
 lost = new Lost(io);
 
-server.listen(80, 'localhost');
+server.listen(process.env.PORT || 1337, 'localhost');
