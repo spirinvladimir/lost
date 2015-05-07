@@ -25,4 +25,4 @@ var http = require('http'),
 
 lost = new Lost(io);
 
-server.listen(1337, 'localhost');
+server.listen(80, 'localhost');
