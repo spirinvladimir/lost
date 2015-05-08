@@ -16,14 +16,7 @@ module.exports = React.createClass({
         return React.DOM.div(
             {className: 'chat'},
             [
-
-                React.createElement(
-                    AnimList,
-                    {
-                        messages: messages,
-                        ee: ee
-                    }
-                ),
+                React.createElement(AnimList, {ee: ee, messages: messages}),
                 React.createElement(Search, {ee: ee}),
                 React.createElement(NewMessage, {ee: ee})
             ]

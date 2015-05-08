@@ -5,7 +5,7 @@ var React = require('react'),
     Markers = require('./markers'),
     style = require('./style'),
     ReactGmaps = require('react-gmaps'),
-    io = require('socket.io-client')('http://localhost:1337'),
+    io = require('socket.io-client')('http://lost.eu01.aws.af.cm/'),
     Gmaps = ReactGmaps.Gmaps,
     coords = {
         lat: 0,
@@ -46,8 +46,8 @@ var React = require('react'),
             'use strict';
             var map = this.refs.Gmaps.getMap();
             map.setOptions({
-                disableDefaultUI: true,
-                styles: style
+                disableDefaultUI: true//,
+                //styles: style
             });
             this.setState({
                 map: map

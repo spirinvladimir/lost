@@ -16,7 +16,6 @@ module.exports = React.createClass({
                 className: 'searchChat',
                 placeholder: this.state.placeholder,
                 onChange: this.onChange,
-                onKeyDown: this.onKeyDown,
                 onFocus: this.onFocus
             },
             this.state.value
@@ -28,23 +27,13 @@ module.exports = React.createClass({
             placeholder: ''
         });
     },
-    onKeyDown: function (e) {
-        'use strict';
-        //if (e.keyCode === 13) {
-        //    clearTimeout(id);
-        //    naviageToAddress(this.state.value, this.props.goto);
-            //}
-    },
     onChange: function (e) {
         'use strict';
-        //var text = e.target.value,
-        //    goto = this.props.goto;
-        //this.setState({
-            //    value: text
-        //});
-            //clearTimeout(id);
-        //id = setTimeout(function () {
-        //    naviageToAddress(text, goto);
-        //}, 2000);
+        var text = e.target.value,
+            ee = this.props.ee;
+        this.setState({
+            value: text
+        });
+        ee.emit('filter', text);
     }
 });

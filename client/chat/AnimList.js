@@ -6,18 +6,26 @@ var React = require('react'),
 module.exports = React.createClass({
     getInitialState: function () {
         return {
-            messages: []
+            messages: [],
+            filter: ''
         };
     },
     render: function () {
         var sm = this.state.messages,
-            pm = this.props.messages;
+            pm = this.props.messages,
+            m = (sm.length === pm.length) ? sm : pm,
+            filter = this.state.filter;
+        if (filter !== '') {
+            m = m.filter(function (message) {
+                return message.indexOf(filter) !== -1;
+            });
+        }
         return React.DOM.div(
             {
                 onWheel: this.wheel
             },
             React.createElement(List, {
-                items: (sm.length === pm.length) ? sm : pm
+                items: m
             })
         );
     },
@@ -52,5 +60,10 @@ module.exports = React.createClass({
             };
         update(props.messages);
         ee.on('update', update);
+        ee.on('filter', function (text) {
+            self.setState({
+                filter: text
+            });
+        });
     }
 });
