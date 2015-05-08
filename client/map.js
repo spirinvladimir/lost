@@ -33,7 +33,7 @@ var React = require('react'),
                         onMapCreated: this.onMapCreated,
                         onClick: this.onClick,
                         style: {
-                            backgroundColor: '#2B2B2B'
+                            backgroundColor: style.outBackgroundColor
                         }
                     },
                     React.createElement(Markers, {io: io, map: this.state.map})
@@ -46,8 +46,8 @@ var React = require('react'),
             'use strict';
             var map = this.refs.Gmaps.getMap();
             map.setOptions({
-                disableDefaultUI: true//,
-                //styles: style
+                disableDefaultUI: true,
+                styles: style.map
             });
             this.setState({
                 map: map
