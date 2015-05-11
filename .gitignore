@@ -1,5 +1,6 @@
 node_modules
 npm-debug.log
 tasks.json
-./public/bundle.js
+public/bundle.js
+client/config.js
 manifest.yml

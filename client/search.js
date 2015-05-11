@@ -25,6 +25,7 @@ module.exports = React.createClass({
         );
     },
     onFocus: function () {
+        'use strict';
         this.setState({
             placeholder: ''
         });

@@ -10,9 +10,6 @@ var React = require('react'),
 
 module.exports = React.createClass({
     render: function () {
-        if (messages.length === 0) {
-            return null;
-        }
         return React.DOM.div(
             {className: 'chat'},
             [

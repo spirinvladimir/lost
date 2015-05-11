@@ -1,16 +1,15 @@
 /*jslint node:true*/
 var React = require('react'),
+    config = require('./config.json'),
     Search = require('./search'),
     Chat = require('./chat/chat'),
     Markers = require('./markers'),
     style = require('./style'),
     ReactGmaps = require('react-gmaps'),
-    io = require('socket.io-client')('http://lost.eu01.aws.af.cm/'),
+    EE = require('events').EventEmitter,
+    ee = new EE(),
+    io = require('socket.io-client')(config.host + ':' + config.port),
     Gmaps = ReactGmaps.Gmaps,
-    coords = {
-        lat: 0,
-        lng: 0
-    },
     App = React.createClass({
         getInitialState: function () {
             'use strict';
@@ -27,9 +26,9 @@ var React = require('react'),
                         ref: 'Gmaps',
                         width: '100%',
                         height: '100%',
-                        lat: coords.lat,
-                        lng: coords.lng,
-                        zoom: 2,
+                        lat: this.props.lat,
+                        lng: this.props.lng,
+                        zoom: this.props.zoom,
                         onMapCreated: this.onMapCreated,
                         onClick: this.onClick,
                         style: {
@@ -59,19 +58,62 @@ var React = require('react'),
             if (map) {
                 console.dir(location);
                 map.setCenter(location);
-                map.setZoom(6);
+                map.setZoom(14);
             }
         },
         onClick: function () {
             'use strict';
             console.log('onClick');
+        },
+        componentWillMount: function () {
+            'use strict';
+            var ee = this.props.ee,
+                self = this;
+            ee.on('location', function (location) {
+                self.goto(location);
+            });
         }
-    });
+    }),
+    start = function (opts) {
+        'use strict';
+        opts = opts || {};
+        React.render(
+            React.createElement(
+                App,
+                {
+                    lat: opts.lat || 0,
+                    lng: opts.lng || 0,
+                    zoom: opts.zoom || 3,
+                    ee: ee
+                }
+            ),
+            document.body
+        );
+    };
 
 module.exports = function () {
     'use strict';
-    React.render(
-        React.createElement(App),
-        document.body
-    );
+    if (navigator.geolocation) {
+        var id = setTimeout(function () {
+            id = undefined;
+            start();
+        }, 100);
+        navigator.geolocation.getCurrentPosition(function (position) {
+            if (id) {
+                clearTimeout(id);
+                start({
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                    zoom: 12
+                });
+            } else {
+                ee.emit('location', {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                });
+            }
+        });
+    } else {
+        start();
+    }
 };
