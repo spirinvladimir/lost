@@ -26,6 +26,11 @@ module.exports = function (io) {
             socket.broadcast.emit('new', message);
         });
         
+        socket.on('marker', function (marker) {
+            markers.push(marker);
+            socket.broadcast.emit('markers', markers);
+        });
+
         socket.on('disconnect', function (socket) {
             console.log(socket);
         });

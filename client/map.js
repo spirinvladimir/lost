@@ -35,7 +35,7 @@ var React = require('react'),
                             backgroundColor: style.outBackgroundColor
                         }
                     },
-                    React.createElement(Markers, {io: io, map: this.state.map})
+                    React.createElement(Markers, {ee: ee, io: io, map: this.state.map})
                 ),
                 React.createElement(Search, {goto: this.goto}),
                 React.createElement(Chat, {io: io})
@@ -56,14 +56,17 @@ var React = require('react'),
             'use strict';
             var map = this.state.map;
             if (map) {
-                console.dir(location);
                 map.setCenter(location);
                 map.setZoom(14);
             }
         },
-        onClick: function () {
+        onClick: function (location) {
             'use strict';
-            console.log('onClick');
+            var ee = this.props.ee;
+            ee.emit('marker', {
+                lat: location.latLng.A,
+                lng: location.latLng.F
+            });
         },
         componentWillMount: function () {
             'use strict';
