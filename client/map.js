@@ -35,10 +35,10 @@ var React = require('react'),
                             backgroundColor: style.outBackgroundColor
                         }
                     },
-                    React.createElement(Markers, {ee: ee, io: io, map: this.state.map})
+                    React.createElement(Markers, {eeMap: ee, io: io, map: this.state.map})
                 ),
                 React.createElement(Search, {goto: this.goto}),
-                React.createElement(Chat, {io: io})
+                React.createElement(Chat, {io: io, eeMap: ee})
             ]);
         },
         onMapCreated: function () {

@@ -28,7 +28,7 @@ module.exports = React.createClass({
     componentDidMount: function () {
         'use strict';
         var self = this,
-            ee = this.props.ee,
+            ee = this.props.eeMap,
             io = this.props.io;
         io.emit('waitingMarkers');
         io.on('markers', function (markers) {
@@ -36,8 +36,7 @@ module.exports = React.createClass({
                 markers: markers
             });
         });
-        ee.on('marker', function (marker) {
-            io.emit('marker', marker);
+        ee.on('newMarker', function (marker) {
             self.setState({
                 markers: self.state.markers.concat(marker)
             });
