@@ -19,9 +19,8 @@ module.exports = React.createClass({
             ]
         );
     },
-    componentWillMount: function () {
-        var self = this,
-            io = this.props.io,
+    componentDidMount: function () {
+        var io = this.props.io,
             eeMap = this.props.eeMap;
         io.on('messages', function (data) {
             messages = data;

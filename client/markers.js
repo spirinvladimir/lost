@@ -28,9 +28,7 @@ module.exports = React.createClass({
     componentDidMount: function () {
         'use strict';
         var self = this,
-            ee = this.props.eeMap,
-            io = this.props.io;
-        io.emit('waitingMarkers');
+            ee = this.props.eeMap;
         io.on('markers', function (markers) {
             self.setState({
                 markers: markers

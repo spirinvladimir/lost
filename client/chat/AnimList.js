@@ -49,7 +49,7 @@ module.exports = React.createClass({
             messages: list
         });
     },
-    componentWillMount: function () {
+    componentDidMount: function () {
         var props = this.props,
             ee = props.ee,
             self = this,

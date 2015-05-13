@@ -31,7 +31,6 @@ module.exports = React.createClass({
         if (e.keyCode === 13) {
             var text = e.target.value,
                 props = this.props,
-                io = props.io,
                 ee = props.ee;
             ee.emit('new', text);
             e.target.value = '';
