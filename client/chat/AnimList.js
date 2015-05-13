@@ -55,7 +55,7 @@ module.exports = React.createClass({
             self = this,
             update = function (list) {
                 self.setState({
-                    messages: props.messages
+                    messages: list
                 });
             };
         update(props.messages);
